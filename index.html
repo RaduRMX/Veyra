@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Veyra — crește vânzările, nu volumul de muncă</title>
+  <meta name="description" content="Veyra: automatizări care cresc vânzările și reduc volumul de muncă. Plan personalizat în 48h, implementare în 7–10 zile."/>
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Veyra — crește vânzările, nu volumul de muncă"/>
+  <meta property="og:description" content="Automatizări care aduc rezultate. Plan în 48h, implementare rapidă, optimizări pe cifre."/>
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0b1320/ffffff.png&text=Veyra"/>
+  <meta property="og:url" content="https://veyra.netlify.app"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Veyra — crește vânzările, nu volumul de muncă"/>
+  <meta name="twitter:description" content="Automatizări care aduc rezultate. Plan în 48h, implementare rapidă, optimizări pe cifre."/>
+  <meta name="twitter:image" content="https://dummyimage.com/1200x630/0b1320/ffffff.png&text=Veyra"/>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Veyra",
+    "url": "https://veyra.netlify.app",
+    "logo": "https://veyra.netlify.app/favicon.svg",
+    "sameAs": ["https://instagram.com/radu_m10"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Veyra",
+    "url": "https://veyra.netlify.app",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://veyra.netlify.app/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+
+  <style>
+    .spot-layer{position:absolute;inset:-140px 0;pointer-events:none;z-index:0}
+    .hero-spots{position:absolute;inset:0;pointer-events:none;z-index:0;
+      background-image:
+        radial-gradient(600px 200px at 10% -10%, rgba(16,185,129,0.20), transparent),
+        radial-gradient(600px 200px at 90% 10%, rgba(59,130,246,0.18), transparent);
+    }
+    .services-spot{background-image:radial-gradient(640px 220px at 82% 32%, rgba(59,130,246,0.12), transparent);}  /* RIGHT */
+    .process-spot{ background-image:radial-gradient(700px 240px at 18% 62%, rgba(16,185,129,0.11), transparent);}  /* LEFT */
+    .prices-spot{  background-image:radial-gradient(680px 230px at 86% 42%, rgba(59,130,246,0.11), transparent);}  /* RIGHT */
+    .testimonial-spot{background-image:radial-gradient(720px 250px at 14% 54%, rgba(16,185,129,0.10), transparent);} /* LEFT */
+    .contact-spot{ background-image:radial-gradient(700px 240px at 88% 72%, rgba(59,130,246,0.10), transparent);}   /* RIGHT */
+
+    /* Scroll reveal */
+    .reveal{opacity:0; transform:translateY(16px); transition:opacity .4s ease, transform .4s ease;}
+    .reveal.show{opacity:1; transform:none;}
+  </style>
+
+<style>
+/* --- Veyra Detail Polish v1: premium micro-interactions, not redesign --- */
+:root{
+  --brand-green:#10B981;
+  --brand-blue:#38BDF8;
+  --surface:#050505;
+  --surface-soft:#090909;
+}
+
+/* Subtle premium texture: prevents the full-black background from feeling flat */
+body{
+  background:
+    radial-gradient(1000px 520px at 82% 8%, rgba(56,189,248,.055), transparent 62%),
+    radial-gradient(900px 480px at 6% 6%, rgba(16,185,129,.050), transparent 58%),
+    linear-gradient(180deg, #050505 0%, #070707 48%, #050505 100%);
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  opacity:.055;
+  background-image:
+    linear-gradient(rgba(255,255,255,.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px);
+  background-size:38px 38px;
+  mask-image:radial-gradient(circle at 45% 12%, black, transparent 74%);
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  opacity:.17;
+  background:
+    repeating-radial-gradient(circle at 20% 20%, rgba(255,255,255,.18) 0 1px, transparent 1px 5px);
+  mix-blend-mode:overlay;
+  mask-image:linear-gradient(to bottom, black, transparent 78%);
+}
+
+/* More layered atmospheric lights */
+.hero-spots{
+  background-image:
+    radial-gradient(720px 280px at 10% -8%, rgba(16,185,129,0.20), transparent 62%),
+    radial-gradient(820px 300px at 88% 6%, rgba(56,189,248,0.17), transparent 64%),
+    radial-gradient(720px 320px at 46% 30%, rgba(255,255,255,0.028), transparent 70%) !important;
+  animation:ambientDrift 18s ease-in-out infinite alternate;
+}
+.services-spot{
+  background-image:
+    radial-gradient(760px 260px at 82% 32%, rgba(56,189,248,0.12), transparent 65%),
+    radial-gradient(520px 210px at 60% 88%, rgba(16,185,129,0.045), transparent 70%) !important;
+}
+.process-spot{
+  background-image:
+    radial-gradient(760px 260px at 18% 62%, rgba(16,185,129,0.11), transparent 65%),
+    radial-gradient(560px 220px at 72% 25%, rgba(56,189,248,0.04), transparent 72%) !important;
+}
+.prices-spot{
+  background-image:
+    radial-gradient(760px 250px at 86% 42%, rgba(56,189,248,0.105), transparent 65%),
+    radial-gradient(520px 210px at 26% 80%, rgba(16,185,129,0.04), transparent 72%) !important;
+}
+.testimonial-spot{
+  background-image:
+    radial-gradient(780px 260px at 14% 54%, rgba(16,185,129,0.10), transparent 66%),
+    radial-gradient(500px 200px at 86% 18%, rgba(56,189,248,0.04), transparent 72%) !important;
+}
+.contact-spot{
+  background-image:
+    radial-gradient(760px 260px at 88% 72%, rgba(56,189,248,0.10), transparent 66%),
+    radial-gradient(540px 220px at 18% 22%, rgba(16,185,129,0.045), transparent 72%) !important;
+}
+@keyframes ambientDrift{
+  0%{ transform:translate3d(0,0,0) scale(1); opacity:.92; }
+  100%{ transform:translate3d(0,-10px,0) scale(1.02); opacity:1; }
+}
+
+/* Gradient text should breathe, not scream */
+.gradient-animate{
+  background-size:220% 100%!important;
+  animation:gradientMove 12s ease-in-out infinite alternate;
+  text-shadow:0 0 26px rgba(56,189,248,.055);
+}
+@keyframes gradientMove{
+  0%{background-position:0% 50%;}
+  100%{background-position:100% 50%;}
+}
+
+/* Brand dot: calmer and more premium than a default pulse */
+.brand-dot{
+  position:relative;
+  background:linear-gradient(135deg,var(--brand-green),var(--brand-blue)) !important;
+  box-shadow:0 0 18px rgba(16,185,129,.35);
+  animation:dotBreath 4.8s ease-in-out infinite;
+}
+.brand-dot::after{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:999px;
+  background:radial-gradient(circle, rgba(56,189,248,.18), transparent 64%);
+}
+@keyframes dotBreath{
+  0%,100%{ transform:scale(1); filter:saturate(1); }
+  50%{ transform:scale(.88); filter:saturate(1.18); }
+}
+
+/* Header: a little more glass, less template */
+header{
+  background:rgba(5,5,5,.64) !important;
+  box-shadow:0 1px 0 rgba(255,255,255,.045), 0 18px 70px rgba(0,0,0,.22);
+}
+header .max-w-7xl::after{
+  content:"";
+  position:absolute;
+  left:1rem;
+  right:1rem;
+  bottom:-1px;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(16,185,129,.22), rgba(56,189,248,.18), transparent);
+  opacity:.55;
+}
+
+/* Navbar underline: hidden by default, visible only on hover/focus so it doesn't look like a bug */
+header nav a{
+  position:relative;
+  padding-bottom:4px;
+  background:none !important;
+  transition:color .22s ease;
+}
+header nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--brand-green),var(--brand-blue));
+  transform:scaleX(0);
+  transform-origin:center;
+  opacity:0;
+  transition:transform .24s ease, opacity .24s ease;
+  will-change:transform,opacity;
+}
+header nav a:hover::after,
+header nav a:focus-visible::after{
+  transform:scaleX(1);
+  opacity:.85;
+}
+
+/* Primary CTA materiality */
+.btn-glow{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  transition:transform .22s ease, box-shadow .22s ease, opacity .22s ease;
+  box-shadow:
+    0 12px 34px rgba(0,0,0,.28),
+    0 0 0 1px rgba(255,255,255,.18) inset;
+}
+.btn-glow::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:inherit;
+  background:linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.72) 45%, rgba(255,255,255,.96));
+  z-index:-1;
+}
+.btn-glow::after{
+  content:"";
+  position:absolute;
+  inset:-34px;
+  border-radius:inherit;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(16,185,129,.40), transparent 35%),
+    radial-gradient(circle at 84% 62%, rgba(56,189,248,.34), transparent 38%);
+  opacity:.42;
+  filter:blur(16px);
+  z-index:-2;
+  pointer-events:none;
+  transition:opacity .22s ease, filter .22s ease, transform .22s ease;
+}
+.btn-glow:hover{
+  transform:translateY(-2px);
+}
+.btn-glow:hover::after{
+  opacity:.7;
+  filter:blur(18px);
+  transform:scale(1.04);
+}
+
+/* Secondary and form buttons feel less flat */
+a[class*="bg-white/10"], a[class*="bg-white/5"], button[class*="bg-white"]{
+  transition:transform .22s ease, background-color .22s ease, border-color .22s ease, opacity .22s ease;
+}
+a[class*="bg-white/10"]:hover, a[class*="bg-white/5"]:hover, button[class*="bg-white"]:hover{
+  transform:translateY(-1px);
+}
+
+/* Cards: fine edge-light, less generic SaaS */
+.group.rounded-3xl,
+details,
+.rounded-3xl.border,
+.rounded-2xl.border{
+  position:relative;
+}
+.group.rounded-3xl::before,
+details::before,
+.rounded-3xl.border::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  padding:1px;
+  background:linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.03), rgba(56,189,248,.09));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+  opacity:.42;
+  transition:opacity .22s ease;
+}
+.group.rounded-3xl:hover::before,
+details:hover::before,
+.rounded-3xl.border:hover::before{
+  opacity:.75;
+}
+.group.rounded-3xl:hover,
+details:hover{
+  transform:translateY(-2px);
+}
+
+/* Inputs: softer focus and consistent brand highlight */
+input:focus,
+textarea:focus{
+  border-color:color-mix(in oklab, var(--brand-green), var(--brand-blue) 35%) !important;
+  box-shadow:0 0 0 3px rgba(16,185,129,.08), 0 0 24px rgba(56,189,248,.055);
+}
+
+/* Reveal: slightly more premium, still subtle */
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  filter:blur(3px);
+  transition:opacity .58s ease, transform .58s cubic-bezier(.2,.8,.2,1), filter .58s ease;
+}
+.reveal.show{
+  opacity:1;
+  transform:none;
+  filter:blur(0);
+}
+
+/* Signature Veyra line under hero metrics */
+.veyra-signature-line{
+  position:absolute;
+  left:1rem;
+  right:1rem;
+  bottom:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(16,185,129,.32), rgba(56,189,248,.26), transparent);
+  opacity:.8;
+}
+.veyra-signature-line::after{
+  content:"";
+  position:absolute;
+  top:-1px;
+  width:150px;
+  height:3px;
+  left:14%;
+  border-radius:999px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.58), transparent);
+  filter:blur(.5px);
+  animation:lineScan 7s ease-in-out infinite;
+}
+@keyframes lineScan{
+  0%,18%{ transform:translateX(0); opacity:0; }
+  32%{ opacity:.65; }
+  72%{ opacity:.35; }
+  100%{ transform:translateX(62vw); opacity:0; }
+}
+
+/* Smooth scrolling & anchor offset for sticky header */
+html{ scroll-behavior:smooth; }
+[id]{ scroll-margin-top: 84px; }
+
+/* Accessibility */
+:where(a,button,[role="button"],summary,input,textarea):focus-visible{
+  outline:2px solid color-mix(in oklab, var(--brand-blue), white 10%);
+  outline-offset:3px;
+  border-radius:1rem;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+  html{ scroll-behavior:auto; }
+}
+@media(max-width:640px){
+  body::before{ opacity:.035; }
+  .veyra-signature-line::after{ display:none; }
+}
+
+/* Smoothness pass: reduce unnecessary paint cost while keeping the new atmosphere */
+.hero-spots,
+.services-spot,
+.process-spot,
+.prices-spot,
+.testimonial-spot,
+.contact-spot{
+  will-change:transform,opacity;
+  transform:translateZ(0);
+}
+.btn-glow,
+.group.rounded-3xl,
+details{
+  backface-visibility:hidden;
+  transform:translateZ(0);
+}
+body::after{
+  opacity:.12;
+}
+.veyra-signature-line::after{
+  animation-duration:9s;
+}
+@media(max-width:768px){
+  .hero-spots,
+  .services-spot,
+  .process-spot,
+  .prices-spot,
+  .testimonial-spot,
+  .contact-spot{
+    animation:none!important;
+  }
+  body::after{ opacity:.08; }
+}
+
+/* -------------------------------------------------------------- */
+</style>
+
+</head>
+<body class="min-h-screen bg-neutral-950 text-neutral-100">
+  <!-- NAV -->
+  <header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/60 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between relative">
+      <div class="flex items-center gap-2">
+        <div class="w-3 h-3 rounded-full brand-dot"></div>
+        <span class="font-semibold tracking-tight">Veyra</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-neutral-300 absolute left-1/2 -translate-x-1/2">
+        <a href="#servicii" class="hover:text-white">Servicii</a>
+        <a href="#proces" class="hover:text-white">Proces</a>
+        <a href="#preturi" class="hover:text-white">Prețuri</a>
+        <a href="#contact" class="hover:text-white">Contact</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="https://wa.me/40765810083?text=Salut!%20Am%20v%C4%83zut%20Veyra%20%C8%99i%20vreau%20s%C4%83%20aflu%20dac%C4%83%20automatiz%C4%83rile%20s-ar%20potrivi%20business-ului%20meu." class="hidden sm:inline text-sm px-3 py-1.5 rounded-xl border border-white/10 hover:bg-white/5">WhatsApp</a>
+        <a href="#contact" class="text-sm font-medium px-3 py-1.5 rounded-xl bg-white text-neutral-900 hover:opacity-90">Vorbește cu noi</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 hero-spots"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-24 relative">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-neutral-300 reveal">
+          <span>Fără termeni tehnici</span><span class="opacity-50">•</span><span>Doar rezultate reale</span>
+        </div>
+        <h1 class="mt-6 text-4xl sm:text-6xl font-bold tracking-tight reveal">
+          Veyra <span class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-sky-400 gradient-animate">crește vânzările</span>, nu volumul de muncă
+        </h1>
+        <p class="mt-6 text-lg text-neutral-300 max-w-2xl reveal">
+          Nu vindem magie. Construim un sistem simplu care postează, răspunde și urmărește clienții ca să nu pierzi bani pe masă.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3 reveal">
+          <a href="#contact" class="px-5 py-3 rounded-2xl bg-white text-neutral-900 font-semibold hover:opacity-90 btn-glow">Cere un audit gratuit</a>
+          <a href="#servicii" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10 hover:bg-white/5">Vezi serviciile</a>
+        </div>
+        <div class="mt-10 grid grid-cols-2 sm:flex sm:flex-row gap-6 text-sm text-neutral-400 reveal">
+          <div>
+            <div class="text-2xl font-semibold text-white">48h</div>
+            <div>Plan personalizat</div>
+          </div>
+          <div>
+            <div class="text-2xl font-semibold text-white">7–10 zile</div>
+            <div>Implementare inițială</div>
+          </div>
+          <div>
+            <div class="text-2xl font-semibold text-white">90%+</div>
+            <div>Răspunsuri automatizate</div>
+          </div>
+          <div>
+            <div class="text-2xl font-semibold text-white">Săptămânal</div>
+            <div>Optimizări pe rezultate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="veyra-signature-line" aria-hidden="true"></div>
+  </section>
+
+  <!-- SERVICII -->
+  <section id="servicii" class="relative py-20 border-t border-white/10">
+    <div class="spot-layer services-spot"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="max-w-2xl reveal">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Ce livrăm concret</h2>
+        <p class="mt-3 text-neutral-300">Clar, pe scurt. Ce aduce bani rămâne. Ce nu funcționează, schimbăm.</p>
+      </div>
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="group rounded-3xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition reveal">
+          <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-4 group-hover:scale-105 transition">
+            <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h18M3 12h18M3 17h12"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold">Postări & oferte automate</h3>
+          <p class="mt-2 text-sm text-neutral-300">Calendar de conținut + oferte care rulează singure. Tu validezi, noi le programăm.</p>
+        </div>
+
+        <div class="group rounded-3xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition reveal">
+          <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-4 group-hover:scale-105 transition">
+            <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h6M21 12c0 4.97-4.03 9-9 9-1.14 0-2.23-.21-3.23-.6L3 21l.6-5.77A8.96 8.96 0 0 1 3 12c0-4.97 4.03 9 9 9s9 4.03 9 9Z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold">Chatbot de vânzări</h3>
+          <p class="mt-2 text-sm text-neutral-300">Răspunde instant, colectează lead-uri, împinge clienții spre comandă.</p>
+        </div>
+
+        <div class="group rounded-3xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition reveal">
+          <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-4 group-hover:scale-105 transition">
+            <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M7 13l4-4 4 4 5-5"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold">Trafic & remarketing</h3>
+          <p class="mt-2 text-sm text-neutral-300">Mai mult trafic relevant și follow-up pe mesaje ca să nu se piardă intenția de cumpărare.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCES -->
+  <section id="proces" class="relative py-20 border-t border-white/10">
+    <div class="spot-layer process-spot"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="max-w-2xl reveal">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Proces simplu, fără fum și oglinzi</h2>
+        <p class="mt-3 text-neutral-300">Spunem ce facem. Facem ce am spus. Măsurăm și îmbunătățim.</p>
+      </div>
+
+      <!-- FAQ scurt -->
+      <div class="mt-10 max-w-3xl space-y-3">
+        <details class="rounded-2xl border border-white/10 bg-white/5 p-4 reveal">
+          <summary class="cursor-pointer font-medium">Cu ce platforme lucrați?</summary>
+          <p class="mt-2 text-sm text-neutral-300">Shopify, WooCommerce, Instagram/FB, Google Ads, email & DM automations. Adaptăm la stack-ul tău.</p>
+        </details>
+        <details class="rounded-2xl border border-white/10 bg-white/5 p-4 reveal">
+          <summary class="cursor-pointer font-medium">Pot opri oricând?</summary>
+          <p class="mt-2 text-sm text-neutral-300">Da. Lucrăm pe perioade lunare. Fără contracte rigide, decidem pe rezultate.</p>
+        </details>
+        <details class="rounded-2xl border border-white/10 bg-white/5 p-4 reveal">
+          <summary class="cursor-pointer font-medium">Cât durează până văd rezultate?</summary>
+          <p class="mt-2 text-sm text-neutral-300">Primele semnale vin în 2–4 săptămâni. Creșterea se stabilizează în 1–3 luni.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRETURI (policy only) -->
+  <section id="preturi" class="relative py-20 border-t border-white/10">
+    <div class="spot-layer prices-spot"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="max-w-3xl reveal">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Prețurile se stabilesc live, pe proiect</h2>
+        <p class="mt-3 text-neutral-300">Fiecare business are altă marjă, altă complexitate și alt obiectiv. Discutăm live și propunem o ofertă adaptată — transparent și la obiect.</p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href="#contact" class="px-5 py-3 rounded-2xl bg-white text-neutral-900 font-semibold hover:opacity-90 btn-glow">Programează o discuție</a>
+          <a href="https://wa.me/40765810083?text=Salut!%20Am%20v%C4%83zut%20Veyra%20%C8%99i%20vreau%20s%C4%83%20aflu%20dac%C4%83%20automatiz%C4%83rile%20s-ar%20potrivi%20business-ului%20meu." class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10 hover:bg-white/5">Scrie pe WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="relative py-16 border-t border-white/10">
+    <div class="spot-layer testimonial-spot"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-6 reveal">
+        <div class="grid md:grid-cols-3 gap-6 items-center">
+          <div class="md:col-span-2">
+            <h3 class="text-2xl font-semibold">Rezultat în 30 de zile</h3>
+            <p class="mt-2 text-neutral-300 text-sm">Magazin artizanal (Shopify) – +38% comenzi din DM/Chat datorită ofertelor programate și răspunsurilor rapide. Buget media minim, focus pe conversie.</p>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
+              <div class="text-xl font-semibold">+38%</div>
+              <div class="text-xs text-neutral-400">Comenzi</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
+              <div class="text-xl font-semibold">92%</div>
+              <div class="text-xs text-neutral-400">Răspunsuri automate</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
+              <div class="text-xl font-semibold">6h/săpt</div>
+              <div class="text-xs text-neutral-400">Timp salvat</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="relative py-20 border-t border-white/10">
+    <div class="spot-layer contact-spot"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="max-w-2xl reveal">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Hai să vedem dacă are sens</h2>
+        <p class="mt-3 text-neutral-300">Scrie-ne 3 lucruri: 1) ce vinzi 2) obiectivul pe 30 de zile 3) ce ai încercat deja. Revenim cu audit în 48h.</p>
+      </div>
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 reveal" accept-charset="utf-8">
+        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="utm_source" id="utm_source"/>
+        <input type="hidden" name="utm_medium" id="utm_medium"/>
+        <input type="hidden" name="utm_campaign" id="utm_campaign"/>
+        <input type="hidden" name="referrer" id="referrer"/>
+        <p class="hidden">
+          <label>Nu completa: <input name="bot-field" /></label>
+        </p>
+        <input name="nume" class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-emerald-400" placeholder="Nume" required />
+        <input name="email" type="email" class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-emerald-400" placeholder="Email" required />
+        <input name="site" class="md:col-span-2 rounded-2xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-emerald-400" placeholder="Website / Instagram (opțional)" />
+        <textarea name="mesaj" class="md:col-span-2 rounded-2xl bg-white/5 border border-white/10 px-4 py-3 h-36 outline-none focus:border-emerald-400" placeholder="Mesaj (1-2 paragrafe)" required></textarea>
+        <div class="md:col-span-2 flex gap-3">
+          <button type="submit" class="rounded-2xl bg-white text-neutral-900 font-semibold px-5 py-3 hover:opacity-90 btn-glow">Trimite</button>
+          <a href="https://wa.me/40765810083?text=Salut!%20Am%20v%C4%83zut%20Veyra%20%C8%99i%20vreau%20s%C4%83%20aflu%20dac%C4%83%20automatiz%C4%83rile%20s-ar%20potrivi%20business-ului%20meu." class="rounded-2xl px-5 py-3 border border-white/10 bg-white/5 hover:bg-white/10">WhatsApp</a>
+        </div>
+      </form>
+      <p class="mt-4 text-xs text-neutral-400">Preferăm mesajele directe și clare. Dacă te putem ajuta – îți spunem. Dacă nu – îți spunem la fel de clar.</p>
+    </div>
+  </section>
+
+  <!-- Sticky CTA (mobile only) -->
+  <a href="#contact" class="sm:hidden fixed bottom-4 inset-x-4 z-50 rounded-2xl bg-white text-neutral-900 font-semibold px-5 py-3 text-center shadow-lg btn-glow">Cere audit gratuit</a>
+
+  <!-- FOOTER -->
+  <footer class="py-10 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
+      <div>© 2025 Veyra — rezultate, nu scuze.</div>
+      <div class="flex items-center gap-4">
+        <a href="https://wa.me/40765810083?text=Salut!%20Am%20v%C4%83zut%20Veyra%20%C8%99i%20vreau%20s%C4%83%20aflu%20dac%C4%83%20automatiz%C4%83rile%20s-ar%20potrivi%20business-ului%20meu." target="_blank" class="hover:text-white">WhatsApp</a>
+        <a href="https://instagram.com/radu_m10" target="_blank" class="hover:text-white">Instagram</a>
+        <a href="mailto:radu10maciuca@gmail.com" class="hover:text-white">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // UTM & referrer capture
+    (function(){
+      const params = new URLSearchParams(location.search);
+      const set = (id, val) => { var el = document.getElementById(id); if (el) el.value = val || ''; };
+      set('utm_source', params.get('utm_source'));
+      set('utm_medium', params.get('utm_medium'));
+      set('utm_campaign', params.get('utm_campaign'));
+      set('referrer', document.referrer);
+    })();
+
+    // Scroll reveal minimal
+    const IO = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); IO.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => IO.observe(el));
+  </script>
+
+<script>
+(function(){
+  const form = document.querySelector('form[data-netlify="true"]');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const data = new FormData(form);
+    fetch('/', { method: 'POST', body: data })
+      .catch(function(){})
+      .finally(function(){ window.location.href = '/thank-you'; });
+  }, { passive: false });
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=/thank-you"></noscript>
+
+</body>
+</html>
