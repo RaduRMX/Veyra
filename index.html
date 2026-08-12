@@ -368,6 +368,69 @@ html{ scroll-behavior:smooth; }
   border-radius:1rem;
 }
 
+/* Compact platform cards: shared dark surface, platform-specific accents */
+.social-card{
+  --social-accent:56,189,248;
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  min-height:4.25rem;
+  padding:.75rem .875rem;
+  overflow:hidden;
+  border:1px solid rgba(var(--social-accent),.2);
+  border-radius:1rem;
+  background:linear-gradient(145deg, rgba(var(--social-accent),.055), rgba(255,255,255,.025) 48%, rgba(255,255,255,.015));
+  color:#f5f5f5;
+  transition:border-color .2s ease, background-color .2s ease, transform .2s ease;
+}
+.social-card::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:2px;
+  background:rgb(var(--social-accent));
+  opacity:.55;
+  transition:opacity .2s ease;
+}
+.social-card:hover{
+  border-color:rgba(var(--social-accent),.56);
+  background-color:rgba(var(--social-accent),.075);
+  transform:translateY(-2px);
+}
+.social-card:hover::before{ opacity:1; }
+.social-card__icon{
+  display:grid;
+  flex:0 0 auto;
+  width:2.25rem;
+  height:2.25rem;
+  place-items:center;
+  border:1px solid rgba(var(--social-accent),.18);
+  border-radius:.75rem;
+  background:rgba(var(--social-accent),.07);
+  color:rgb(var(--social-accent));
+}
+.social-card__icon svg{ width:1.125rem; height:1.125rem; }
+.social-card__copy{ min-width:0; line-height:1.15; }
+.social-card__label{ display:block; font-size:.875rem; font-weight:600; letter-spacing:-.01em; }
+.social-card--whatsapp{ --social-accent:37,211,102; }
+.social-card--email{ --social-accent:56,189,248; }
+.social-card--instagram{
+  border-color:rgba(214,79,124,.24);
+  background:linear-gradient(145deg, rgba(131,58,180,.07), rgba(255,255,255,.025) 50%, rgba(252,175,69,.035));
+}
+.social-card--instagram::before{
+  background:linear-gradient(180deg, #833ab4, #d62976 42%, #f56040 76%, #f77737);
+}
+.social-card--instagram:hover{
+  border-color:rgba(225,82,139,.6);
+  background-color:rgba(193,53,132,.075);
+}
+.social-card--instagram .social-card__icon{
+  border-color:rgba(225,82,139,.2);
+  background:rgba(193,53,132,.07);
+}
+
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{
     animation:none!important;
@@ -595,7 +658,7 @@ body::after{
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="relative py-20 border-t border-white/10">
+  <section id="contact" class="relative pt-20 pb-12 sm:pb-14 border-t border-white/10">
     <div class="spot-layer contact-spot"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
       <div class="max-w-2xl reveal">
@@ -621,6 +684,29 @@ body::after{
         </div>
       </form>
       <p class="mt-4 text-xs text-neutral-400">Preferăm mesajele directe și clare. Dacă te putem ajuta – îți spunem. Dacă nu – îți spunem la fel de clar.</p>
+      <div class="max-w-[36rem] mx-auto mt-6 sm:mt-7" aria-label="Contact direct">
+        <p class="mb-2 text-center text-[13px] font-medium tracking-wide text-neutral-200">Sau scrie-ne direct</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <a href="https://wa.me/40765810083?text=Salut!%20Am%20v%C4%83zut%20Veyra%20%C8%99i%20vreau%20s%C4%83%20aflu%20dac%C4%83%20automatiz%C4%83rile%20s-ar%20potrivi%20business-ului%20meu." target="_blank" rel="noopener noreferrer" class="social-card social-card--whatsapp" aria-label="Contactează Veyra pe WhatsApp">
+          <span class="social-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2a9.84 9.84 0 0 0-8.5 14.78L2 22l5.36-1.49A9.96 9.96 0 1 0 12.04 2Zm0 17.99a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.18.88.85-3.1-.2-.32A8.06 8.06 0 1 1 12.04 20Zm4.42-6.04c-.24-.12-1.43-.7-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.95-1.2a7.3 7.3 0 0 1-1.35-1.68c-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.59 4.11 3.63.57.25 1.02.39 1.37.5.58.18 1.1.16 1.51.1.46-.07 1.43-.59 1.63-1.15.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"/></svg>
+          </span>
+          <span class="social-card__copy"><span class="social-card__label">WhatsApp</span></span>
+        </a>
+        <a href="https://instagram.com/radu_m10" target="_blank" rel="noopener noreferrer" class="social-card social-card--instagram" aria-label="Vezi Veyra pe Instagram">
+          <span class="social-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="instagram-icon-gradient" gradientUnits="userSpaceOnUse" x1="3" y1="3" x2="21" y2="21"><stop stop-color="#833ab4"/><stop offset=".38" stop-color="#d62976"/><stop offset=".72" stop-color="#f56040"/><stop offset="1" stop-color="#f77737"/></linearGradient></defs><rect x="3" y="3" width="18" height="18" rx="5" stroke="url(#instagram-icon-gradient)" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="url(#instagram-icon-gradient)" stroke-width="2"/><circle cx="17.4" cy="6.7" r="1.15" fill="#d62976"/></svg>
+          </span>
+          <span class="social-card__copy"><span class="social-card__label">Instagram</span></span>
+        </a>
+        <a href="mailto:radu10maciuca@gmail.com" class="social-card social-card--email" aria-label="Trimite un email către Veyra">
+          <span class="social-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>
+          </span>
+          <span class="social-card__copy"><span class="social-card__label">Email</span></span>
+        </a>
+      </div>
+    </div>
     </div>
   </section>
 
@@ -628,14 +714,9 @@ body::after{
   <a href="#contact" class="sm:hidden fixed bottom-4 inset-x-4 z-50 rounded-2xl bg-white text-neutral-900 font-semibold px-5 py-3 text-center shadow-lg btn-glow">Cere audit gratuit</a>
 
   <!-- FOOTER -->
-  <footer class="py-10 border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
-      <div>© 2026 Veyra — rezultate, nu scuze.</div>
-      <div class="flex items-center gap-4">
-        <a href="https://wa.me/40765810083?text=Salut!%20Am%20v%C4%83zut%20Veyra%20%C8%99i%20vreau%20s%C4%83%20aflu%20dac%C4%83%20automatiz%C4%83rile%20s-ar%20potrivi%20business-ului%20meu." target="_blank" class="hover:text-white">WhatsApp</a>
-        <a href="https://instagram.com/radu_m10" target="_blank" class="hover:text-white">Instagram</a>
-        <a href="mailto:radu10maciuca@gmail.com" class="hover:text-white">Email</a>
-      </div>
+  <footer class="pt-10 pb-28 sm:py-10 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center text-sm text-neutral-400">
+      © 2026 Veyra — rezultate, nu scuze.
     </div>
   </footer>
 
