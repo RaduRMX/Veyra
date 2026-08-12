@@ -293,11 +293,59 @@ details:hover{
   transform:translateY(-2px);
 }
 
-/* Inputs: softer focus and consistent brand highlight */
-input:focus,
-textarea:focus{
+/* Contact fields: explicit empty, filled and focused visual states */
+form[name="contact"] :is(input:not([type="hidden"]), textarea){
+  -webkit-appearance:none;
+  appearance:none;
+  background-color:#0d0d0d;
+  background-clip:padding-box;
+  -webkit-background-clip:padding-box;
+  border-color:rgba(255,255,255,.10);
+  outline:none;
+  box-shadow:inset 0 0 0 1000px #0d0d0d;
+  color:#f5f5f5;
+  -webkit-text-fill-color:#f5f5f5;
+  caret-color:#f5f5f5;
+}
+
+form[name="contact"] :is(input:not([type="hidden"]), textarea).is-filled:not(:focus){
+  border-color:rgba(255,255,255,.22) !important;
+}
+
+/* Neutralize browser autofill paint in both focused and unfocused states. */
+form[name="contact"] :is(input:not([type="hidden"]), textarea):is(:autofill, :-webkit-autofill){
+  -webkit-appearance:none !important;
+  appearance:none !important;
+  background-color:#0d0d0d !important;
+  background-image:none !important;
+  background-clip:padding-box !important;
+  -webkit-background-clip:padding-box !important;
+  border-color:rgba(255,255,255,.22) !important;
+  outline:none !important;
+  box-shadow:inset 0 0 0 1000px #0d0d0d !important;
+  -webkit-box-shadow:inset 0 0 0 1000px #0d0d0d !important;
+  -webkit-text-fill-color:#f5f5f5 !important;
+  caret-color:#f5f5f5;
+}
+
+form[name="contact"] :is(input:not([type="hidden"]), textarea):focus,
+form[name="contact"] :is(input:not([type="hidden"]), textarea):is(:autofill, :-webkit-autofill):focus{
+  background-color:#0d0d0d !important;
+  background-clip:padding-box !important;
+  -webkit-background-clip:padding-box !important;
   border-color:color-mix(in oklab, var(--brand-green), var(--brand-blue) 35%) !important;
-  box-shadow:0 0 0 3px rgba(16,185,129,.08), 0 0 24px rgba(56,189,248,.055);
+  outline:2px solid color-mix(in oklab, var(--brand-blue), white 10%);
+  outline-offset:3px;
+  box-shadow:
+    inset 0 0 0 1000px #0d0d0d,
+    0 0 0 3px rgba(16,185,129,.08),
+    0 0 24px rgba(56,189,248,.055) !important;
+  -webkit-box-shadow:
+    inset 0 0 0 1000px #0d0d0d,
+    0 0 0 3px rgba(16,185,129,.08),
+    0 0 24px rgba(56,189,248,.055) !important;
+  color:#f5f5f5;
+  -webkit-text-fill-color:#f5f5f5 !important;
 }
 
 /* Reveal: slightly more premium, still subtle */
@@ -634,6 +682,36 @@ body::after{
       set('utm_campaign', params.get('utm_campaign'));
       set('referrer', document.referrer);
     })();
+
+    // Keep contact field state in sync for typing, restore and asynchronous autofill.
+    const contactFields = document.querySelectorAll(
+      'form[name="contact"] input:not([type="hidden"]), form[name="contact"] textarea'
+    );
+    const syncFilledState = field => {
+      field.classList.toggle('is-filled', field.value.length > 0);
+    };
+    const syncAllContactFields = () => contactFields.forEach(syncFilledState);
+
+    contactFields.forEach(field => {
+      ['input', 'change', 'blur'].forEach(eventName => {
+        field.addEventListener(eventName, () => syncFilledState(field));
+      });
+    });
+
+    const scheduleFilledStateChecks = () => {
+      syncAllContactFields();
+      [100, 500, 1200].forEach(delay => {
+        window.setTimeout(syncAllContactFields, delay);
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', scheduleFilledStateChecks, { once: true });
+    } else {
+      scheduleFilledStateChecks();
+    }
+    window.addEventListener('load', scheduleFilledStateChecks, { once: true });
+    window.addEventListener('pageshow', scheduleFilledStateChecks);
 
     // Scroll reveal minimal
     const IO = new IntersectionObserver(entries => {
