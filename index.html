@@ -293,11 +293,40 @@ details:hover{
   transform:translateY(-2px);
 }
 
-/* Inputs: softer focus and consistent brand highlight */
-input:focus,
-textarea:focus{
+/* Contact fields: explicit empty, filled and focused visual states */
+form[name="contact"] :is(input:not([type="hidden"]), textarea){
+  background-color:rgba(255,255,255,.05);
+  border-color:rgba(255,255,255,.10);
+  box-shadow:none;
+  color:#f5f5f5;
+}
+
+form[name="contact"] :is(input:not([type="hidden"]), textarea).is-filled:not(:focus){
+  background-color:rgba(255,255,255,.05);
+  border-color:rgba(255,255,255,.22);
+  outline:none;
+  box-shadow:none;
+  color:#f5f5f5;
+}
+
+/* Neutralize browser autofill paint; .is-filled remains the visual source of truth. */
+form[name="contact"] :is(input:not([type="hidden"]), textarea):is(:autofill, :-webkit-autofill){
+  background-color:rgba(255,255,255,.05) !important;
+  border-color:rgba(255,255,255,.22) !important;
+  outline:none;
+  box-shadow:none !important;
+  -webkit-box-shadow:none !important;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:#f5f5f5;
+  caret-color:#f5f5f5;
+}
+
+form[name="contact"] :is(input:not([type="hidden"]), textarea):focus{
+  background-color:rgba(255,255,255,.05);
   border-color:color-mix(in oklab, var(--brand-green), var(--brand-blue) 35%) !important;
-  box-shadow:0 0 0 3px rgba(16,185,129,.08), 0 0 24px rgba(56,189,248,.055);
+  box-shadow:0 0 0 3px rgba(16,185,129,.08), 0 0 24px rgba(56,189,248,.055) !important;
+  color:#f5f5f5;
 }
 
 /* Reveal: slightly more premium, still subtle */
@@ -634,6 +663,36 @@ body::after{
       set('utm_campaign', params.get('utm_campaign'));
       set('referrer', document.referrer);
     })();
+
+    // Keep contact field state in sync for typing, restore and asynchronous autofill.
+    const contactFields = document.querySelectorAll(
+      'form[name="contact"] input:not([type="hidden"]), form[name="contact"] textarea'
+    );
+    const syncFilledState = field => {
+      field.classList.toggle('is-filled', field.value.length > 0);
+    };
+    const syncAllContactFields = () => contactFields.forEach(syncFilledState);
+
+    contactFields.forEach(field => {
+      ['input', 'change', 'blur'].forEach(eventName => {
+        field.addEventListener(eventName, () => syncFilledState(field));
+      });
+    });
+
+    const scheduleFilledStateChecks = () => {
+      syncAllContactFields();
+      [100, 500, 1200].forEach(delay => {
+        window.setTimeout(syncAllContactFields, delay);
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', scheduleFilledStateChecks, { once: true });
+    } else {
+      scheduleFilledStateChecks();
+    }
+    window.addEventListener('load', scheduleFilledStateChecks, { once: true });
+    window.addEventListener('pageshow', scheduleFilledStateChecks);
 
     // Scroll reveal minimal
     const IO = new IntersectionObserver(entries => {
