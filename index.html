@@ -303,19 +303,25 @@ form[name="contact"] :is(input:not([type="hidden"]), textarea){
 
 form[name="contact"] :is(input:not([type="hidden"]), textarea).is-filled:not(:focus){
   background-color:#0d0d0d;
-  border-color:rgba(255,255,255,.22);
-  outline:none;
-  box-shadow:inset 0 0 0 1000px #0d0d0d;
+  border-color:transparent !important;
+  outline:none !important;
+  box-shadow:
+    inset 0 0 0 1000px #0d0d0d,
+    inset 0 0 0 1px rgba(255,255,255,.22);
   color:#f5f5f5;
 }
 
 /* Neutralize browser autofill paint; .is-filled remains the visual source of truth. */
-form[name="contact"] :is(input:not([type="hidden"]), textarea).is-filled:is(:autofill, :-webkit-autofill):not(:focus){
+form[name="contact"] :is(input:not([type="hidden"]), textarea):is(:autofill, :-webkit-autofill):not(:focus){
   background-color:#0d0d0d !important;
-  border-color:rgba(255,255,255,.22) !important;
-  outline:none;
-  box-shadow:inset 0 0 0 1000px #0d0d0d !important;
-  -webkit-box-shadow:inset 0 0 0 1000px #0d0d0d !important;
+  border-color:transparent !important;
+  outline:none !important;
+  box-shadow:
+    inset 0 0 0 1000px #0d0d0d,
+    inset 0 0 0 1px rgba(255,255,255,.22) !important;
+  -webkit-box-shadow:
+    inset 0 0 0 1000px #0d0d0d,
+    inset 0 0 0 1px rgba(255,255,255,.22) !important;
   -webkit-text-fill-color:#f5f5f5;
   caret-color:#f5f5f5;
 }
