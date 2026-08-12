@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://veyra.netlify.app/sitemap.xml

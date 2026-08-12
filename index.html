@@ -5,17 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Veyra — crește vânzările, nu volumul de muncă</title>
   <meta name="description" content="Veyra: automatizări care cresc vânzările și reduc volumul de muncă. Plan personalizat în 48h, implementare în 7–10 zile."/>
+  <link rel="canonical" href="https://veyra.netlify.app/"/>
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website"/>
   <meta property="og:title" content="Veyra — crește vânzările, nu volumul de muncă"/>
   <meta property="og:description" content="Automatizări care aduc rezultate. Plan în 48h, implementare rapidă, optimizări pe cifre."/>
-  <meta property="og:image" content="https://dummyimage.com/1200x630/0b1320/ffffff.png&text=Veyra"/>
-  <meta property="og:url" content="https://veyra.netlify.app"/>
-  <meta name="twitter:card" content="summary_large_image"/>
+  <meta property="og:url" content="https://veyra.netlify.app/"/>
+  <meta name="twitter:card" content="summary"/>
   <meta name="twitter:title" content="Veyra — crește vânzările, nu volumul de muncă"/>
   <meta name="twitter:description" content="Automatizări care aduc rezultate. Plan în 48h, implementare rapidă, optimizări pe cifre."/>
-  <meta name="twitter:image" content="https://dummyimage.com/1200x630/0b1320/ffffff.png&text=Veyra"/>
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
@@ -33,12 +32,7 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Veyra",
-    "url": "https://veyra.netlify.app",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://veyra.netlify.app/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    "url": "https://veyra.netlify.app/"
   }
   </script>
 
@@ -621,7 +615,7 @@ body::after{
   <!-- FOOTER -->
   <footer class="py-10 border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
-      <div>© 2025 Veyra — rezultate, nu scuze.</div>
+      <div>© 2026 Veyra — rezultate, nu scuze.</div>
       <div class="flex items-center gap-4">
         <a href="https://wa.me/40765810083?text=Salut!%20Am%20v%C4%83zut%20Veyra%20%C8%99i%20vreau%20s%C4%83%20aflu%20dac%C4%83%20automatiz%C4%83rile%20s-ar%20potrivi%20business-ului%20meu." target="_blank" class="hover:text-white">WhatsApp</a>
         <a href="https://instagram.com/radu_m10" target="_blank" class="hover:text-white">Instagram</a>
@@ -653,15 +647,20 @@ body::after{
   const form = document.querySelector('form[data-netlify="true"]');
   if(!form) return;
   form.addEventListener('submit', function(e){
+    if (!window.fetch) return;
     e.preventDefault();
     const data = new FormData(form);
     fetch('/', { method: 'POST', body: data })
-      .catch(function(){})
-      .finally(function(){ window.location.href = '/thank-you'; });
+      .then(function(response){
+        if (!response.ok) throw new Error('Form submission failed');
+        window.location.href = '/thank-you';
+      })
+      .catch(function(){
+        alert('Mesajul nu a putut fi trimis. Te rugăm să încerci din nou.');
+      });
   }, { passive: false });
 })();
 </script>
-<noscript><meta http-equiv="refresh" content="0; url=/thank-you"></noscript>
 
 </body>
 </html>
