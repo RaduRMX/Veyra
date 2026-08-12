@@ -298,6 +298,8 @@ form[name="contact"] :is(input:not([type="hidden"]), textarea){
   -webkit-appearance:none;
   appearance:none;
   background-color:#0d0d0d;
+  background-clip:padding-box;
+  -webkit-background-clip:padding-box;
   border-color:rgba(255,255,255,.10);
   outline:none;
   box-shadow:inset 0 0 0 1000px #0d0d0d;
@@ -316,6 +318,8 @@ form[name="contact"] :is(input:not([type="hidden"]), textarea):is(:autofill, :-w
   appearance:none !important;
   background-color:#0d0d0d !important;
   background-image:none !important;
+  background-clip:padding-box !important;
+  -webkit-background-clip:padding-box !important;
   border-color:rgba(255,255,255,.22) !important;
   outline:none !important;
   box-shadow:inset 0 0 0 1000px #0d0d0d !important;
@@ -327,6 +331,8 @@ form[name="contact"] :is(input:not([type="hidden"]), textarea):is(:autofill, :-w
 form[name="contact"] :is(input:not([type="hidden"]), textarea):focus,
 form[name="contact"] :is(input:not([type="hidden"]), textarea):is(:autofill, :-webkit-autofill):focus{
   background-color:#0d0d0d !important;
+  background-clip:padding-box !important;
+  -webkit-background-clip:padding-box !important;
   border-color:color-mix(in oklab, var(--brand-green), var(--brand-blue) 35%) !important;
   outline:2px solid color-mix(in oklab, var(--brand-blue), white 10%);
   outline-offset:3px;
